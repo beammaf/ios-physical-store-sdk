@@ -1,0 +1,11 @@
+framework module PhysicalStoreSdk {
+  umbrella header "PhysicalStoreSdk.h"
+
+  export *
+  module * { export * }
+}
+
+module PhysicalStoreSdk.Swift {
+    header "PhysicalStoreSdk-Swift.h"
+    requires objc
+}
