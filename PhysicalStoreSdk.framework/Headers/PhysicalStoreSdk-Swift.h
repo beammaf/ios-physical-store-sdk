@@ -183,21 +183,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
-@class PSStore;
-@class PSTerminal;
-
-SWIFT_PROTOCOL("_TtP16PhysicalStoreSdk15BeaconDetecable_")
-@protocol BeaconDetecable
-/// Starts the beacon scanner, detect beacon and get actual store information
-- (void)detectedStoreWithStoreHandler:(void (^ _Nonnull)(PSStore * _Nonnull))storeHandler;
-/// Returns detected terminal inside the store
-- (void)detectedTerminalWithTerminalHandler:(void (^ _Nonnull)(PSTerminal * _Nonnull))terminalHandler;
-/// Returns all the terminals inside the Store
-- (void)getStoreTerminalsWithTerminalsHandler:(void (^ _Nonnull)(NSArray<PSTerminal *> * _Nonnull))terminalsHandler;
-/// Returns whenever error occured
-- (void)didErrorOccuredWithErrorHandler:(void (^ _Nonnull)(NSError * _Nonnull))errorHandler;
-@end
-
 
 
 
@@ -208,56 +193,12 @@ SWIFT_CLASS("_TtC16PhysicalStoreSdk8PSBeacon")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-
-SWIFT_CLASS("_TtC16PhysicalStoreSdk7PSStore")
-@interface PSStore : NSObject
-@property (nonatomic, readonly, copy) NSString * _Nonnull currency;
-@property (nonatomic, readonly, copy) NSString * _Nonnull storeGroupID;
-@property (nonatomic, readonly, copy) NSString * _Nonnull storeID;
-@property (nonatomic, readonly, copy) NSString * _Nonnull storeDisplayName;
-@property (nonatomic, readonly, copy) NSString * _Nonnull experienceType;
-@property (nonatomic, readonly, copy) NSArray<PSTerminal *> * _Nonnull terminals;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
-@end
-
-
-SWIFT_CLASS("_TtC16PhysicalStoreSdk10PSTerminal")
-@interface PSTerminal : NSObject
-@property (nonatomic, readonly, copy) NSString * _Nonnull terminalID;
-@property (nonatomic, readonly, copy) NSString * _Nonnull terminalDisplayName;
-- (nonnull instancetype)initWithTerminalID:(NSString * _Nonnull)terminalID terminalDisplayName:(NSString * _Nonnull)terminalDisplayName OBJC_DESIGNATED_INITIALIZER;
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
-@end
-
-@class PhysicalStoreBuilder;
-
-SWIFT_PROTOCOL("_TtP16PhysicalStoreSdk13PhysicalStore_")
-@protocol PhysicalStore <BeaconDetecable>
-+ (void)startWithBuilder:(PhysicalStoreBuilder * _Nonnull)builder;
-@end
-
 /// Tps environment configuration for different usage
 typedef SWIFT_ENUM(NSInteger, PhysicalStoreApiEnvironment, closed) {
   PhysicalStoreApiEnvironmentDev = 0,
   PhysicalStoreApiEnvironmentStaging = 1,
   PhysicalStoreApiEnvironmentProduction = 2,
 };
-
-@class PhysicalStoreEnvironment;
-@protocol TokenProvider;
-
-/// Initial creater builder for Tps
-SWIFT_CLASS("_TtC16PhysicalStoreSdk20PhysicalStoreBuilder")
-@interface PhysicalStoreBuilder : NSObject
-- (nonnull instancetype)initWithEnvironment:(PhysicalStoreEnvironment * _Nonnull)environment tokenProvider:(id <TokenProvider> _Nonnull)tokenProvider OBJC_DESIGNATED_INITIALIZER;
-@property (nonatomic, readonly, strong) PhysicalStoreEnvironment * _Nonnull currentEnvironment;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
-@end
 
 
 SWIFT_CLASS("_TtC16PhysicalStoreSdk24PhysicalStoreCredentials")
@@ -283,15 +224,63 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PhysicalStor
 - (PhysicalStoreEnvironment * _Nonnull)selectEnvironment:(enum PhysicalStoreApiEnvironment)environment SWIFT_WARN_UNUSED_RESULT;
 @end
 
+@class StoreModel;
+@class TerminalModel;
+@class PhysicalStoreSDKSettings;
 
-SWIFT_CLASS("_TtC16PhysicalStoreSdk23PhysicalStoreSdkManager")
-@interface PhysicalStoreSdkManager : NSObject <PhysicalStore>
-+ (PhysicalStoreSdkManager * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
-+ (void)startWithBuilder:(PhysicalStoreBuilder * _Nonnull)builder;
-- (void)detectedStoreWithStoreHandler:(void (^ _Nonnull)(PSStore * _Nonnull))storeHandler;
-- (void)detectedTerminalWithTerminalHandler:(void (^ _Nonnull)(PSTerminal * _Nonnull))terminalHandler;
-- (void)getStoreTerminalsWithTerminalsHandler:(void (^ _Nonnull)(NSArray<PSTerminal *> * _Nonnull))terminalsHandler;
-- (void)didErrorOccuredWithErrorHandler:(void (^ _Nonnull)(NSError * _Nonnull))errorHandler;
+SWIFT_PROTOCOL("_TtP16PhysicalStoreSdk24PhysicalStoreSDKProtocol_")
+@protocol PhysicalStoreSDKProtocol
+/// Starts the beacon scanner, detect beacon and get actual store information
+- (void)detectedStoreWithStoreHandler:(void (^ _Nonnull)(StoreModel * _Nonnull))storeHandler didError:(void (^ _Nonnull)(NSError * _Nonnull))didError;
+/// Returns detected terminal inside the store
+- (void)detectedTerminalWithTerminalHandler:(void (^ _Nonnull)(TerminalModel * _Nonnull))terminalHandler didError:(void (^ _Nonnull)(NSError * _Nonnull))didError;
+/// Returns all the terminals inside the Store
+- (void)getStoreTerminalsWithTerminalsHandler:(void (^ _Nonnull)(NSArray<TerminalModel *> * _Nonnull))terminalsHandler didError:(void (^ _Nonnull)(NSError * _Nonnull))didError;
+- (void)startWithSettings:(PhysicalStoreSDKSettings * _Nonnull)settings;
+@end
+
+@protocol TokenProvider;
+
+/// Initial creater builder for Tps
+SWIFT_CLASS("_TtC16PhysicalStoreSdk24PhysicalStoreSDKSettings")
+@interface PhysicalStoreSDKSettings : NSObject
+- (nonnull instancetype)initWithEnvironment:(enum PhysicalStoreApiEnvironment)environment tokenProvider:(id <TokenProvider> _Nonnull)tokenProvider OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, strong) PhysicalStoreEnvironment * _Nonnull currentEnvironment;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC16PhysicalStoreSdk16PhysicalStoreSdk")
+@interface PhysicalStoreSdk : NSObject <PhysicalStoreSDKProtocol>
+- (void)startWithSettings:(PhysicalStoreSDKSettings * _Nonnull)settings;
+- (void)detectedStoreWithStoreHandler:(void (^ _Nonnull)(StoreModel * _Nonnull))storeHandler didError:(void (^ _Nonnull)(NSError * _Nonnull))didError;
+- (void)detectedTerminalWithTerminalHandler:(void (^ _Nonnull)(TerminalModel * _Nonnull))terminalHandler didError:(void (^ _Nonnull)(NSError * _Nonnull))didError;
+- (void)getStoreTerminalsWithTerminalsHandler:(void (^ _Nonnull)(NSArray<TerminalModel *> * _Nonnull))terminalsHandler didError:(void (^ _Nonnull)(NSError * _Nonnull))didError;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC16PhysicalStoreSdk10StoreModel")
+@interface StoreModel : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull currency;
+@property (nonatomic, readonly, copy) NSString * _Nonnull storeGroupID;
+@property (nonatomic, readonly, copy) NSString * _Nonnull storeID;
+@property (nonatomic, readonly, copy) NSString * _Nonnull storeDisplayName;
+@property (nonatomic, readonly, copy) NSString * _Nonnull experienceType;
+@property (nonatomic, readonly, copy) NSArray<TerminalModel *> * _Nullable terminals;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC16PhysicalStoreSdk13TerminalModel")
+@interface TerminalModel : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull terminalID;
+@property (nonatomic, readonly, copy) NSString * _Nonnull terminalDisplayName;
+- (nonnull instancetype)initWithTerminalID:(NSString * _Nonnull)terminalID terminalDisplayName:(NSString * _Nonnull)terminalDisplayName OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
