@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
     s.version           = '0.0.12'
     s.summary           = 'Physical Store Detect SDK Provided by Beam UAE'
     s.homepage          = 'http://beamuae.app/'
-    s.dependency 'Moya/ReactiveSwift', '~> 12.0'
+    s.dependency 'BeamCore'
     s.author            = { 'Name' => 'developer@beamuae.app' }
     s.license           = { :type => 'MIT', :file => 'LICENSE' }
 
