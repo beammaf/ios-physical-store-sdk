@@ -239,7 +239,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PhysicalStor
 
 typedef SWIFT_ENUM(NSInteger, PhysicalStoreError, closed) {
   PhysicalStoreErrorInvalidCommand = 701,
-  PhysicalStoreErrorHttpError = -1,
   PhysicalStoreErrorNoStoreFound = 705,
   PhysicalStoreErrorNoTerminalFound = 706,
   PhysicalStoreErrorActiveSessionExists = 707,
@@ -247,6 +246,9 @@ typedef SWIFT_ENUM(NSInteger, PhysicalStoreError, closed) {
   PhysicalStoreErrorUnauthorized = 401,
   PhysicalStoreErrorInvalidPartner = 702,
   PhysicalStoreErrorDeviceNotFound = 704,
+  PhysicalStoreErrorTimeOut = 708,
+  PhysicalStoreErrorInvalidStore = 709,
+  PhysicalStoreErrorInvalidTerminal = 710,
 };
 static NSString * _Nonnull const PhysicalStoreErrorDomain = @"PhysicalStoreSdk.PhysicalStoreError";
 
