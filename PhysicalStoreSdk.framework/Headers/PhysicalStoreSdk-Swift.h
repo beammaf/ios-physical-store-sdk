@@ -239,12 +239,19 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PhysicalStor
 
 typedef SWIFT_ENUM(NSInteger, PhysicalStoreError, closed) {
   PhysicalStoreErrorInvalidCommand = 701,
+/// No Store Found
   PhysicalStoreErrorNoStoreFound = 705,
+/// No Terminal Found
   PhysicalStoreErrorNoTerminalFound = 706,
+/// There is already an active detect session
   PhysicalStoreErrorActiveSessionExists = 707,
+/// Unknown Error Occurred
   PhysicalStoreErrorUnknownError = 0,
+/// Unauthorized
   PhysicalStoreErrorUnauthorized = 401,
+/// Partner is not associated with store
   PhysicalStoreErrorInvalidPartner = 702,
+/// This beacon is not associated with any store or terminal
   PhysicalStoreErrorDeviceNotFound = 704,
   PhysicalStoreErrorTimeOut = 708,
   PhysicalStoreErrorInvalidStore = 709,
@@ -272,7 +279,7 @@ SWIFT_PROTOCOL("_TtP16PhysicalStoreSdk24PhysicalStoreSDKProtocol_")
 SWIFT_CLASS("_TtC16PhysicalStoreSdk24PhysicalStoreSDKSettings")
 @interface PhysicalStoreSDKSettings : NSObject
 - (nonnull instancetype)initWithEnvironment:(enum PhysicalStoreServer)environment tokenProvider:(id <PhysicalStoreCredentialProvider> _Nonnull)tokenProvider OBJC_DESIGNATED_INITIALIZER;
-@property (nonatomic, readonly, strong) PhysicalStoreEnvironment * _Nonnull currentEnvironment;
+@property (nonatomic, readonly, copy) NSString * _Nonnull baseUrl;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
