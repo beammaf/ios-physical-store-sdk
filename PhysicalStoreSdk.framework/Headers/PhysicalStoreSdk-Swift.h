@@ -209,7 +209,7 @@ typedef SWIFT_ENUM(NSInteger, ExperienceType, closed) {
 /// Supply enrollment for authentication
 SWIFT_PROTOCOL("_TtP16PhysicalStoreSdk31PhysicalStoreCredentialProvider_")
 @protocol PhysicalStoreCredentialProvider
-- (void)getPhysicalStoreToken:(void (^ _Nonnull)(PhysicalStoreCredentials * _Nonnull))onTokenReceived;
+- (void)getPhysicalStoreCredentials:(void (^ _Nonnull)(PhysicalStoreCredentials * _Nonnull))didCredentialsReceived;
 @end
 
 
@@ -221,20 +221,6 @@ SWIFT_CLASS("_TtC16PhysicalStoreSdk24PhysicalStoreCredentials")
 - (nonnull instancetype)initWithToken:(NSString * _Nonnull)token userId:(NSString * _Nullable)userId partnerId:(NSString * _Nonnull)partnerId OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
-@end
-
-enum PhysicalStoreServer : NSInteger;
-
-/// Environment for the Tps
-SWIFT_CLASS("_TtC16PhysicalStoreSdk24PhysicalStoreEnvironment")
-@interface PhysicalStoreEnvironment : NSObject
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PhysicalStoreEnvironment * _Nonnull shared;)
-+ (PhysicalStoreEnvironment * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
-@property (nonatomic, readonly, copy) NSString * _Nonnull baseUrl;
-@property (nonatomic, readonly, strong) PhysicalStoreEnvironment * _Nonnull current;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
-- (PhysicalStoreEnvironment * _Nonnull)selectEnvironment:(enum PhysicalStoreServer)environment SWIFT_WARN_UNUSED_RESULT;
 @end
 
 typedef SWIFT_ENUM(NSInteger, PhysicalStoreError, closed) {
@@ -274,6 +260,7 @@ SWIFT_PROTOCOL("_TtP16PhysicalStoreSdk24PhysicalStoreSDKProtocol_")
 - (void)startWithSettings:(PhysicalStoreSDKSettings * _Nonnull)settings;
 @end
 
+enum PhysicalStoreServer : NSInteger;
 
 /// Initial creater builder for Tps
 SWIFT_CLASS("_TtC16PhysicalStoreSdk24PhysicalStoreSDKSettings")
