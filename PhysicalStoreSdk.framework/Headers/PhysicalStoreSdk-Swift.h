@@ -224,7 +224,7 @@ SWIFT_CLASS("_TtC16PhysicalStoreSdk24PhysicalStoreCredentials")
 @end
 
 typedef SWIFT_ENUM(NSInteger, PhysicalStoreError, closed) {
-  PhysicalStoreErrorInvalidCommand = 701,
+  PhysicalStoreErrorLocationPermissionNotGranted = 704,
 /// No Store Found
   PhysicalStoreErrorNoStoreFound = 705,
 /// No Terminal Found
@@ -235,13 +235,9 @@ typedef SWIFT_ENUM(NSInteger, PhysicalStoreError, closed) {
   PhysicalStoreErrorUnknownError = 0,
 /// Unauthorized
   PhysicalStoreErrorUnauthorized = 401,
-/// Partner is not associated with store
-  PhysicalStoreErrorInvalidPartner = 702,
-/// This beacon is not associated with any store or terminal
-  PhysicalStoreErrorDeviceNotFound = 704,
-  PhysicalStoreErrorTimeOut = 708,
   PhysicalStoreErrorInvalidStore = 709,
   PhysicalStoreErrorInvalidTerminal = 710,
+  PhysicalStoreErrorInternetConnectionError = 711,
 };
 static NSString * _Nonnull const PhysicalStoreErrorDomain = @"PhysicalStoreSdk.PhysicalStoreError";
 
