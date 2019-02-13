@@ -238,6 +238,7 @@ typedef SWIFT_ENUM(NSInteger, PhysicalStoreError, closed) {
   PhysicalStoreErrorInvalidStore = 709,
   PhysicalStoreErrorInvalidTerminal = 710,
   PhysicalStoreErrorNoConnection = 711,
+  PhysicalStoreErrorBluetoothConnection = 712,
 };
 static NSString * _Nonnull const PhysicalStoreErrorDomain = @"PhysicalStoreSdk.PhysicalStoreError";
 
