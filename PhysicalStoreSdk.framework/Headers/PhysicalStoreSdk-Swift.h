@@ -263,7 +263,6 @@ enum PhysicalStoreServer : NSInteger;
 SWIFT_CLASS("_TtC16PhysicalStoreSdk24PhysicalStoreSDKSettings")
 @interface PhysicalStoreSDKSettings : NSObject
 - (nonnull instancetype)initWithEnvironment:(enum PhysicalStoreServer)environment tokenProvider:(id <PhysicalStoreCredentialProvider> _Nonnull)tokenProvider OBJC_DESIGNATED_INITIALIZER;
-@property (nonatomic, readonly, copy) NSString * _Nonnull baseUrl;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end

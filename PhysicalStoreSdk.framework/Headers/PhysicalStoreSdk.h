@@ -2,8 +2,7 @@
 //  PhysicalStoreSdk.h
 //  PhysicalStoreSdk
 //
-//  Created by Olgu Sırman on 30.01.2019.
-//  Copyright © 2019 VNGRS. All rights reserved.
+//  Copyright © 2019 BEAM. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
