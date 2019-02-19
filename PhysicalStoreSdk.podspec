@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
     s.dependency        'Moya/RxSwift', '~> 12.0'
     s.dependency        'RxCoreLocation', '~> 1.3.2'
     s.platform          = :ios
-    s.source            = { :git => 'https://github.com/beammaf/ios-physical-store-sdk.git',:branch => 'master'}
+    s.source            = { :git => 'https://github.com/beammaf/ios-physical-store-sdk.git',:branch => 'refactorDependencies'}
 
     s.ios.deployment_target = '11.0'
     s.ios.vendored_frameworks = 'PhysicalStoreSdk.framework'
