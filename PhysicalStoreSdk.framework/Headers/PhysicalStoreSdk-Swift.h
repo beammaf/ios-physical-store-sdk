@@ -278,10 +278,13 @@ SWIFT_CLASS("_TtC16PhysicalStoreSdk16PhysicalStoreSdk")
 - (void)getStoreTerminalsWithTerminalsHandler:(void (^ _Nonnull)(NSArray<Terminal *> * _Nonnull))terminalsHandler didError:(void (^ _Nonnull)(enum PhysicalStoreError))didError;
 @end
 
+
+
 /// Tps environment configuration for different usage
 typedef SWIFT_ENUM(NSInteger, PhysicalStoreServer, closed) {
   PhysicalStoreServerStaging = 0,
   PhysicalStoreServerProduction = 1,
+  PhysicalStoreServerUat = 2,
 };
 
 
