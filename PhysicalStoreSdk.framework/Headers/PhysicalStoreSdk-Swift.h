@@ -285,6 +285,7 @@ typedef SWIFT_ENUM(NSInteger, PhysicalStoreServer, closed) {
   PhysicalStoreServerStaging = 0,
   PhysicalStoreServerProduction = 1,
   PhysicalStoreServerUat = 2,
+  PhysicalStoreServerSandbox = 3,
 };
 
 
