@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name              = 'PhysicalStoreSdk'
-    s.version           = '0.0.21'
+    s.version           = '0.1.7'
     s.summary           = 'Physical Store Detect SDK Provided by Beam UAE'
     s.homepage          = 'http://beamuae.app/'
     s.dependency 'BeamCore'
