@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name              = 'PhysicalStoreSdk'
 <<<<<<< HEAD
-    s.version           = '0.1.15'
+    s.version           = '0.1.16'
 =======
     s.version           = '1.0.2'
 >>>>>>> d0fa1d4f851fa83df8a7c0c34d93bc8b4f966896
