@@ -14,7 +14,6 @@ Pod::Spec.new do |s|
     s.source            = { :git => 'https://github.com/beammaf/ios-physical-store-sdk.git',:branch => 'master'}
 
     s.ios.deployment_target = '11.0'
-    s.swift_version = '4.2'
     s.ios.vendored_frameworks = 'PhysicalStoreSdk.framework'
     s.requires_arc = true
 end
