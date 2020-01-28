@@ -1,10 +1,6 @@
 Pod::Spec.new do |s|
     s.name              = 'PhysicalStoreSdk'
-<<<<<<< HEAD
-    s.version           = '0.1.17'
-=======
-    s.version           = '1.0.2'
->>>>>>> d0fa1d4f851fa83df8a7c0c34d93bc8b4f966896
+    s.version           = '1.0.3'
     s.summary           = 'Physical Store Detect SDK Provided by Beam UAE'
     s.homepage          = 'http://beamuae.app/'
     s.dependency 'Moya/RxSwift', '~> 14.0.0-alpha.1'
