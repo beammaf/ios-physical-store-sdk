@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
     s.version           = '1.0.10'
     s.summary           = 'Physical Store Detect SDK Provided by Beam UAE'
     s.homepage          = 'http://beamuae.app/'
-    s.dependency 'Moya/RxSwift', '14.0.0-alpha.1'
+    s.dependency 'Moya/RxSwift', '14.0.0'
     s.dependency 'RxCoreLocation', '~> 1.4.0'
     s.dependency 'RxBluetoothKit', '~> 5.3.0'
 
