@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
     s.homepage          = 'http://beamuae.app/'
     s.dependency 'Moya/RxSwift', '14.0.0'
     s.dependency 'RxCoreLocation', '~> 1.4.0'
-    s.dependency 'RxBluetoothKit', '~> 5.3.0'
+    s.dependency 'RxBluetoothKit', '~> 6.0.0'
 
     s.author            = { 'Name' => 'developer@beamuae.app' }
     s.license           = { :type => 'MIT', :file => 'LICENSE' }
